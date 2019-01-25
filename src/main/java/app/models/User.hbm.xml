@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net /hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="app.models">
+
+	<class name="User" table="users">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="name" />
+		<property name="phone" />
+		<property name="email" />
+		<property name="password" />
+		
+		<many-to-one name="department" column="department_id"
+			class="Department" />
+			
+		<set name="expenses" table="expenses" inverse="false" lazy="false">
+			<key column="user_id" />
+			<one-to-many class="Expense" />
+		</set>
+
+		<set name="roles" table="users_roles" lazy="false"
+			cascade="save-update">
+			<key column="user_id"></key>
+			<many-to-many class="Role" column="role_id">
+			</many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

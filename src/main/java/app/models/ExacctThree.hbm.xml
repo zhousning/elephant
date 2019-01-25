@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net /hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="app.models">
+
+	<class name="ExacctThree" table="exacctThrees">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="name"  />
+		
+		<many-to-one name="exacctTwo" column="exacctTwo_id" class="ExacctTwo"
+			lazy="false" />
+		<set name="expenses" table="expenses" inverse="false" lazy="false">
+			<key column="exacctThree_id" />
+			<one-to-many class="Expense" />
+		</set>
+		
+		
+		
+	</class>
+</hibernate-mapping>

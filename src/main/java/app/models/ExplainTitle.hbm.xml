@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net /hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="app.models">
+
+	<class name="ExplainTitle" table="explainTitles">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="name"  />
+		<property name="order"  />
+		
+		<many-to-one name="explain" column="explain_id" class="Explain"
+			lazy="false" />
+		
+		
+		
+	</class>
+</hibernate-mapping>
