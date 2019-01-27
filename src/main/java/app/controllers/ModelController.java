@@ -118,7 +118,7 @@ public class ModelController {
 			return "redirect:/models/new";
 		}
 
-		String baseUrl = "F:\\Project\\lion\\src\\main\\";
+		String baseUrl = "F:\\Project\\elephant\\src\\main\\";
 		createDoc(model, baseUrl);
 		outI18n(model, baseUrl);
 

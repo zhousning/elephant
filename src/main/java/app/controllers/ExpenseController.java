@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -146,6 +148,14 @@ public class ExpenseController extends BaseController {
 	@RequestMapping("/uploadExcel")
 	public String uploadExcel(@RequestParam("excel") MultipartFile file,
 			@RequestParam("exacctThree") String exacctThreeName) {
+		if (file == null) {
+			return "expense/index";
+		}
+		String fileName = file.getOriginalFilename();
+		String extString = fileName.substring(fileName.lastIndexOf("."));
+		if (".xls".equals(extString) || ".xlsx".equals(extString)) {
+			return "expense/index";
+		}
 		List<Map<String, String>> list = ParseExcel.parseExcelContent(file);
 		if (list == null) {
 			return "expense/index";
