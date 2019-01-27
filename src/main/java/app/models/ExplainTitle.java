@@ -16,7 +16,7 @@ import org.springframework.format.annotation.NumberFormat;
 public class ExplainTitle {
 	private Integer id;
 	private String name;
-	private Integer order;
+	private Integer sequence;
 	
 	private Explain explain;	
 	
@@ -27,11 +27,11 @@ public class ExplainTitle {
 	
 	public ExplainTitle(
 		String name,
-		Integer order
+		Integer sequence
 	) {
 		super();
 		this.name = name;
-		this.order = order;
+		this.sequence = sequence;
 	}
 	
 	public String getName() {
@@ -41,12 +41,12 @@ public class ExplainTitle {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getOrder() {
-		return order;
+	public Integer getsequence() {
+		return sequence;
 	}
 	
-	public void setOrder(Integer order) {
-		this.order = order;
+	public void setsequence(Integer sequence) {
+		this.sequence = sequence;
 	}
 	
 	public Explain getExplain() {

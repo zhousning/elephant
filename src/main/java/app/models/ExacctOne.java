@@ -16,7 +16,6 @@ import org.springframework.format.annotation.NumberFormat;
 
 public class ExacctOne {
 	private Integer id;
-	@NotBlank
 	private String name;
 	
 	private Set<ExacctTwo> exacctTwos = new LinkedHashSet<ExacctTwo>();

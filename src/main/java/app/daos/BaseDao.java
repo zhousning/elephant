@@ -23,4 +23,6 @@ public interface BaseDao<T> {
 	public List<T> findAll();
 	
 	public List<T> findByIds(Integer[] ids);
+
+	public void batchSave(List<T> entities);
 }

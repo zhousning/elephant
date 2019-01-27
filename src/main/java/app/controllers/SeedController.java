@@ -5,29 +5,79 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import app.models.Role;
 import app.models.User;
+import app.services.CenterService;
+import app.services.DepartmentService;
+import app.services.ExacctOneService;
+import app.services.ExacctThreeService;
+import app.services.ExacctTwoService;
+import app.services.RoleService;
+import app.services.UserService;
+import app.works.InitDepartment;
+import app.works.InitExacct;
+import app.works.InitUser;
 
 @Controller
 @RequestMapping("/seeds")
-public class SeedController  extends BaseController  {	
+public class SeedController  extends BaseController  {
+	@Autowired
+	ExacctOneService exacctOneService;
+	@Autowired
+	ExacctTwoService exacctTwoService;
+	@Autowired
+	ExacctThreeService exacctThreeService;
+	@Autowired
+	CenterService centerService;
+	@Autowired
+	DepartmentService departmentService;
+	@Autowired
+	UserService userService;
+	@Autowired
+	RoleService roleService;
+	
 	@RequestMapping("/initdata")
 	@ResponseBody
-	public Map<String, String> initData() {
+	public Map<String, String> initData(HttpServletRequest request) {
 		initRole();
-		initUser();
+		initAdmin();
+		String exacctPath = request.getSession().getServletContext().getRealPath("/static/xls/exacct.xlsx");
+		initExacct(exacctPath);
+		
+		String departmentPath = request.getSession().getServletContext().getRealPath("/static/xls/department.xlsx");
+		initDepartment(departmentPath);
+		
+		String userPath = request.getSession().getServletContext().getRealPath("/static/xls/user.xlsx");
+		initUser(userPath);
+		
 		Map<String, String> status = new HashMap<String, String>();
 		status.put("status", "success");
 		return status;
 	}
 	
-	private void initUser() {
+	public void initExacct(String filePath) {
+		InitExacct.init(filePath, exacctOneService, exacctTwoService, exacctThreeService);
+	}
+	
+	public void initDepartment(String filePath) {
+		InitDepartment.init(filePath, centerService, departmentService);
+	}
+	
+	public void initUser(String filePath) {
+		InitUser.init(filePath, userService, roleService, departmentService);
+	}
+	
+	private void initAdmin() {
 		String hashAlgorithmName = "MD5";
 		Object credentials = "admin@admin.com";
 		Object salt = ByteSource.Util.bytes("admin@admin.com");
@@ -46,12 +96,10 @@ public class SeedController  extends BaseController  {
 	
 	private void initRole() {
 		Role adminRole = new Role(messageSource.getMessage("roles.admin", null, null));
-		Role leaderRole = new Role(messageSource.getMessage("roles.leader", null, null));
-		Role teacher = new Role(messageSource.getMessage("roles.default", null, null));
+		Role defaultRole = new Role(messageSource.getMessage("roles.default", null, null));
 
 		roleService.save(adminRole);
-		roleService.save(leaderRole);
-		roleService.save(teacher);
+		roleService.save(defaultRole);
 	}
 
 }

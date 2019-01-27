@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -18,8 +19,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import app.models.Role;
 import app.models.User;
+import app.services.DepartmentService;
 import app.services.RoleService;
 import app.services.UserService;
+import app.works.InitUser;
+import app.works.ParseExcel;
 import javassist.expr.NewArray;
 
 
@@ -34,7 +38,16 @@ public class UsersTest {
 	RoleService roleService;
 	
 	@Autowired
+	DepartmentService departmentService;
+	
+	@Autowired
 	private ResourceBundleMessageSource messageSource;
+	
+	@Test
+	public void initUserTest() {
+		String filePath = "F:\\Project\\elephant\\src\\main\\webapp\\static\\xls\\user.xlsx";
+		InitUser.init(filePath, userService, roleService, departmentService);
+	}
 	
 	@Test
 	public void testRole() {

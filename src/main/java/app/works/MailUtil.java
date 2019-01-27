@@ -4,12 +4,36 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.lang3.time.DateUtils;
+
+import freemarker.template.utility.DateUtil;
+import javassist.expr.NewArray;
+
+import static org.hamcrest.CoreMatchers.nullValue;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
  * 邮件工具类
  */
 public class MailUtil {
+	public static void main(String[] args) throws ParseException {
+		Calendar calendar = new GregorianCalendar(1900,0,-1);  
+		Date d = calendar.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		
+		String month = "43667.0";
+		month = month.substring(0, month.lastIndexOf("."));
+		Date dd = DateUtils.addDays(d,Integer.valueOf(month));
+		System.out.println(sdf.format(dd));
+	}
 	/**
 	 * 发送邮件
 	 * 

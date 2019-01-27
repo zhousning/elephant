@@ -46,6 +46,7 @@ public class Expense {
 			this.staffid = staffid;
 			this.staffname = staffname;
 			this.sum = sum;
+			this.info = info;
 		}
 	
 	public Expense(

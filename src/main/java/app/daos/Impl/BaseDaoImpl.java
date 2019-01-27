@@ -3,7 +3,12 @@ package app.daos.Impl;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 
 import app.daos.BaseDao;
@@ -16,8 +21,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	private Class<T> clazz;
 
 	public BaseDaoImpl() {
-		ParameterizedType pt = (ParameterizedType) this.getClass()
-				.getGenericSuperclass();
+		ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();
 		this.clazz = (Class<T>) pt.getActualTypeArguments()[0];
 	}
 
@@ -25,10 +29,37 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		hibernateTemplate.save(entity);
 	}
 
+	public void batchSave(List<T> entities) {
+		hibernateTemplate.execute(new HibernateCallback<T>() {
+			@Override
+			public T doInHibernate(Session session) throws HibernateException {
+				if (CollectionUtils.isNotEmpty(entities)) {
+					try {
+						int i = 0;
+						for (T t : entities) {
+							session.save(t);
+							i++;
+							if (i % 100 == 0) {
+								session.flush();
+								session.clear();
+							}
+						}
+					} catch (Exception e) {
+						System.out.println("批量插入出现异常：" + e);
+					} finally {
+						if (session != null)
+							session.close();
+					}
+				}
+				return null;
+			}
+		});
+	}
+
 	public void delete(T entity) {
 		hibernateTemplate.delete(entity);
 	}
-	
+
 	public void deleteById(Integer id) {
 		T entity = hibernateTemplate.get(clazz, id);
 		hibernateTemplate.delete(entity);
@@ -41,9 +72,9 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	public T findById(Integer id) {
 		return hibernateTemplate.get(clazz, id);
 	}
-	
+
 	public T findByName(String name) {
-		String hql = "from " + clazz.getSimpleName() + " where u.name = :name";
+		String hql = "from " + clazz.getSimpleName() + " u where u.name = :name";
 		List<T> objs = (List<T>) hibernateTemplate.findByNamedParam(hql, "name", name);
 		T obj = null;
 		if (objs.size() != 0) {
@@ -55,9 +86,9 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	public List<T> findAll() {
 		return (List<T>) hibernateTemplate.find("from " + clazz.getSimpleName());
 	}
-	
+
 	public List<T> findByIds(Integer[] ids) {
-        String sql = "from " + clazz.getSimpleName() + " where id in :ids";
+		String sql = "from " + clazz.getSimpleName() + " where id in :ids";
 		return (List<T>) hibernateTemplate.findByNamedParam(sql, "ids", ids);
 	}
 }

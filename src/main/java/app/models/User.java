@@ -15,12 +15,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class User {
     private Integer id;
-    @NotBlank
     private String name;
-    
     private String phone;
-    @Email
-    @NotBlank
     private String email;
     @NotBlank
     private String password;
@@ -40,13 +36,20 @@ public class User {
    		super();
    	}
 
-   	public User(String name, String email, String password) {
+   	public User(String email, String name, String password) {
    		super();
    		this.name = name;
    		this.email = email;
    		this.password = password;
    	}
+   	
+	public User(String email, String password) {
+   		super();
+   		this.email = email;
+   		this.password = password;
+   	}
 
+	
    	public User(String name, String phone, String email, String password) {
    		super();
    		this.name = name;
@@ -55,8 +58,6 @@ public class User {
    		this.password = password;
    	}
    	
-   	
-
 	public Set<Expense> getExpenses() {
 		return expenses;
 	}

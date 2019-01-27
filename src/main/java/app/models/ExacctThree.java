@@ -16,7 +16,6 @@ import org.springframework.format.annotation.NumberFormat;
 
 public class ExacctThree {
 	private Integer id;
-	@NotBlank
 	private String name;
 	
 	private ExacctTwo exacctTwo;	

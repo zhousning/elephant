@@ -59,4 +59,9 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 		return dao.findByName(name);
 	}
 
+	@Override
+	public void batchSave(List<T> entities) {
+		dao.batchSave(entities);
+	}
+
 }
