@@ -54,7 +54,8 @@ public class ExpenseTest {
 	
 	@Test
 	public void Tool() {
-		uploadExcel();
+		Expense expense = expenseService.findById(583);
+		System.out.println(expense.getDepartment().getName());
 	}
 	
 	public String uploadExcel() {

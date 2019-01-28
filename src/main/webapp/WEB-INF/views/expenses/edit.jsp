@@ -31,7 +31,7 @@
 				<div class="container-fluid">
 					<div class="page-header">
 						<h1>
-							<fmt:message key="expenses.new"></fmt:message>
+							<fmt:message key="expenses.edit"></fmt:message>
 						</h1>
 					</div>
 					<div class="row">

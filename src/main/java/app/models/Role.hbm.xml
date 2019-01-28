@@ -11,7 +11,7 @@
 			<generator class="native" />
 		</id>
 		<property name="name" />
-		<set name="users" table="users_roles" lazy="false">
+		<set name="users" table="users_roles">
 			<key column="role_id"></key>
 			<many-to-many class="User" column="user_id">
 			</many-to-many>

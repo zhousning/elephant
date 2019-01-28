@@ -50,18 +50,27 @@
 								<thead>
 									<tr>
 										<th><fmt:message key="expense.date"></fmt:message></th>
+										<th>工号</th>
+										<th>员工</th>
+										<th>部门</th>
+										<th>费用项目</th>
 										<th><fmt:message key="expense.sum"></fmt:message></th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td>${expense.date}</td>
+										<td>${expense.staffid }</td>
+										<td>${expense.staffname }</td>
+										<td>${expense.exacctThree.name }
+										<td>${expense.department.name }</td>
 										<td>${expense.sum}</td>
 									</tr>
 								</tbody>
 							</table>
-							<c:forEach items="${expense.explains }" var="explain">
-								<p>${explain.name } : ${explain.description }</p>
+							<c:set value="${fn:split(expense.info, 'SplitLine')}" var="infos"></c:set>
+							<c:forEach items="${fn:split(explains, 'SplitLine')}" var="explain" varStatus="status">	
+								<p>${explain} : ${infos[status.index]}</p>
 							</c:forEach>
 						</div>
 					</div>

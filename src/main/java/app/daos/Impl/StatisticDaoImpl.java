@@ -50,7 +50,6 @@ public class StatisticDaoImpl extends BaseDaoImpl<Statistic> implements Statisti
 				"' and department_id = " + departmentId.toString() + 
 				" and exacctThree_id = " + exacctId.toString() + 
 				" group by DATE_FORMAT(date, '%Y-%m')  order by  DATE_FORMAT(date, '%Y-%m') ";
-		System.out.println(sql);
 		
 		SessionFactory sessionFactory = hibernateTemplate.getSessionFactory();
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -112,7 +111,7 @@ public class StatisticDaoImpl extends BaseDaoImpl<Statistic> implements Statisti
 				"from expenses " + 
 				"where date between '" + start + "' and '" + end + 
 				"' group by department_id";
-		
+		System.out.println(sql);
 		SessionFactory sessionFactory = hibernateTemplate.getSessionFactory();
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query query = currentSession.createSQLQuery(sql);

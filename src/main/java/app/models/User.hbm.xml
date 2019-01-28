@@ -16,7 +16,7 @@
 		<many-to-one name="department" column="department_id"
 			class="Department" />
 			
-		<set name="expenses" table="expenses" inverse="false" lazy="false">
+		<set name="expenses" table="expenses" inverse="false">
 			<key column="user_id" />
 			<one-to-many class="Expense" />
 		</set>

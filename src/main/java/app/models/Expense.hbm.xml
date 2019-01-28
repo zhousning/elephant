@@ -14,13 +14,9 @@
 		<property name="sum"  type="float"/>
 		<property name="info" type="text"></property>
 		
-		<many-to-one name="exacctThree" column="exacctThree_id" class="ExacctThree"
-			lazy="false" />
-		<many-to-one name="department" column="department_id" class="Department"
-			lazy="false" />
-		<many-to-one name="explain" column="explain_id" class="Explain"
-			lazy="false" />
-		<many-to-one name="user" column="user_id" class="User"
-			lazy="false" />		
+		<many-to-one name="exacctThree" column="exacctThree_id" class="ExacctThree" lazy="false"/>
+		<many-to-one name="department" column="department_id" class="Department" lazy="false"/>
+		<many-to-one name="explain" column="explain_id" class="Explain" />
+		<many-to-one name="user" column="user_id" class="User"/>		
 	</class>
 </hibernate-mapping>

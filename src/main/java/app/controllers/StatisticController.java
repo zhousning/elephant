@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
 
@@ -21,12 +22,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
-import app.models.ImageAttachment;
-import app.services.ImageAttachmentService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import app.models.Statistic;
+import app.services.DepartmentService;
+import app.services.ExacctThreeService;
 import app.services.StatisticService;
 
 
@@ -36,6 +36,10 @@ public class StatisticController extends BaseController {
 
 	@Autowired
 	StatisticService statisticService;
+	@Autowired
+	ExacctThreeService exacctThreeService;
+	@Autowired
+	DepartmentService departmentService;
 	
 	
 	@ModelAttribute
@@ -51,11 +55,33 @@ public class StatisticController extends BaseController {
 		return "statistics/index";
 	}
 	
-	public void totalExpenseByDepAndDate(Map<String, Object> map
-		, @RequestParam(value="departmentId", required=false) Integer departmentId
-		, @RequestParam(value = "start", required = false) String start
-		, @RequestParam(value = "end", required = false) String end) {
-		
+	@RequestMapping("/random_selector")
+	@ResponseBody 
+	public Map<String, Object> randomSelector(
+			@RequestParam(value="departmentId", required=false) Integer departmentId
+			, @RequestParam(value="exacctId", required=false) Integer exacctId
+			, @RequestParam(value = "start", required = false) String start
+			, @RequestParam(value = "end", required = false) String end) {
+		Map<String, Object> map = new HashMap<String, Object>();
+	
+		List<Statistic> depSumCostPerMonth = statisticService.depSumCostPerMonth(departmentId, start, end);
+		List<Statistic> depExacctCostPerMonth = statisticService.depExacctCostPerMonth(departmentId, exacctId, start, end);
+		List<Statistic> allDepExacctCostPerMonth = statisticService.allDepExacctCostPerMonth(exacctId, start, end);
+		List<Statistic> allCostPerMonth = statisticService.allCostPerMonth(start, end);
+		List<Statistic> allCostPerDepByMonth = statisticService.allCostPerDepByMonth(start, end);
+		List<Statistic> allCostPerDepByMonthAndExacct = statisticService.allCostPerDepByMonthAndExacct(exacctId, start, end);
+	
+		map.put("depSumCostPerMonth", depSumCostPerMonth);
+		map.put("depExacctCostPerMonth", depExacctCostPerMonth);
+		map.put("allDepExacctCostPerMonth", allDepExacctCostPerMonth);
+		map.put("allCostPerMonth", allCostPerMonth);
+		map.put("allCostPerDepByMonth", allCostPerDepByMonth);
+		map.put("allCostPerDepByMonthAndExacct", allCostPerDepByMonthAndExacct);
+		String exacctName = exacctThreeService.findById(exacctId).getName();
+		String depName = departmentService.findById(departmentId).getName();
+		map.put("exacct", exacctName);
+		map.put("department", depName);
+		return map;
 	}
 	
 	@RequestMapping("/new")

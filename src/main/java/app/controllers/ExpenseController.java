@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import antlr.StringUtils;
 import app.models.ImageAttachment;
 import app.services.ImageAttachmentService;
 
@@ -74,7 +76,8 @@ public class ExpenseController extends BaseController {
 
 	@RequestMapping("/index")
 	public String index(Map<String, Object> map) {
-		map.put("exacctThrees", exacctThreeService.findAll());
+		List<ExacctThree> exacctThrees = exacctThreeService.findAll();
+		map.put("exacctThrees", exacctThrees);
 		map.put("expenses", expenseService.findAll());
 		return "expenses/index";
 	}
@@ -91,13 +94,13 @@ public class ExpenseController extends BaseController {
 	public String edit(@PathVariable("id") Integer id, Map<String, Object> map) {
 		Expense expense = expenseService.findById(id);
 		prepareData(map, expense);
-		map.put("expense", expense);
 		return "expenses/edit";
 	}
 
 	@RequestMapping(value = "/{id}")
 	public String show(@PathVariable("id") Integer id, Map<String, Object> map) {
-		map.put("expense", expenseService.findById(id));
+		Expense expense = expenseService.findById(id);
+		prepareData(map, expense);
 		return "expenses/show";
 	}
 
@@ -129,7 +132,9 @@ public class ExpenseController extends BaseController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(@Valid Expense expense, Errors result, Map<String, Object> map,
 			@RequestParam(value = "exacctThree.id", required = false) Integer exacctThreeId,
-			@RequestParam(value = "department.id", required = false) Integer departmentId, HttpServletRequest request,
+			@RequestParam(value = "department.id", required = false) Integer departmentId, 
+			@RequestParam(value = "explainNames", required = false) String[] explainNames,
+			HttpServletRequest request,
 			HttpServletResponse response) {
 		if (result.getErrorCount() > 0) {
 			for (FieldError error : result.getFieldErrors()) {
@@ -138,7 +143,12 @@ public class ExpenseController extends BaseController {
 			prepareData(map, expense);
 			return "/expenses/edit";
 		}
-
+		
+		String info = "";
+		for (int i=0; i< explainNames.length; i++) {
+			info += explainNames[i] + "SplitLine";
+		}
+		expense.setInfo(info);
 		setAssociate(expense, exacctThreeId, departmentId);
 
 		expenseService.update(expense);
@@ -148,17 +158,19 @@ public class ExpenseController extends BaseController {
 	@RequestMapping("/uploadExcel")
 	public String uploadExcel(@RequestParam("excel") MultipartFile file,
 			@RequestParam("exacctThree") String exacctThreeName) {
-		if (file == null) {
-			return "expense/index";
-		}
 		String fileName = file.getOriginalFilename();
-		String extString = fileName.substring(fileName.lastIndexOf("."));
-		if (".xls".equals(extString) || ".xlsx".equals(extString)) {
-			return "expense/index";
+		if (fileName.equals("")) {
+			return "redirect:/expenses/index";
 		}
-		List<Map<String, String>> list = ParseExcel.parseExcelContent(file);
+		String extString = fileName.substring(fileName.lastIndexOf("."));
+		List<Map<String, String>> list = null;
+		if (".xls".equals(extString) || ".xlsx".equals(extString)) {
+			list = ParseExcel.parseExcelContent(file);
+		} else {
+			return "redirect:/expenses/index";
+		}
 		if (list == null) {
-			return "expense/index";
+			return "redirect:/expenses/index";
 		}
 		
 		Map<String, Explain> explainMap = getExplainMap();
@@ -195,6 +207,7 @@ public class ExpenseController extends BaseController {
 			map.remove("工号");
 			map.remove("姓名");
 			map.remove("部门");
+			map.remove("中心/工厂");
 			map.remove(exacctThreeName);
 
 			String info = "";
@@ -206,7 +219,7 @@ public class ExpenseController extends BaseController {
 				info += val + "SplitLine";
 			}
 			
-			Explain explain = explainMap.get(info);
+			Explain explain = explainMap.get(explainTitle);
 			if (explain == null) {
 				explain = new Explain(explainTitle);
 				explainService.save(explain);
@@ -223,8 +236,7 @@ public class ExpenseController extends BaseController {
 				expenseService.save(expense);
 			}
 		}
-		return"expenses/index";
-
+		return "redirect:/expenses/index";
 	}
 	
 	
@@ -262,8 +274,12 @@ public class ExpenseController extends BaseController {
 	private void prepareData(Map<String, Object> map, Expense expense) {
 		map.put("exacctThrees", exacctThreeService.findAll());
 		map.put("departments", departmentService.findAll());
+		map.put("expense", expense);
+				
 		if (expense != null) {
-			prepareExplains(expense, map);
+			Integer[] ids = expenseService.findExplainIdDeptIdById(expense.getId());
+			Explain explain = explainService.findById(ids[0]);
+			map.put("explains", explain.getName());
 		}
 	}
 

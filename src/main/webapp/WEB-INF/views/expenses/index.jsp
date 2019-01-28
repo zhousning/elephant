@@ -38,20 +38,24 @@
 						</h1>
 					</div>
 					<div class="row">
-						<div class="col-md-1">
+						<%-- <div class="col-md-1">
 							<a href="expenses/new" class="btn btn-primary btn-block"> <fmt:message
 									key="btn.add"></fmt:message>
 							</a>
-						</div>
-						<div class="col-md-1">
-						  	<form action="expenses/uploadExcel" method="POST" enctype="multipart/form-data">
-						  	  <select name="exacctThree">
-						  	  	<c:forEach items="${exacctThrees }" var="exacct">
-						  	  		<option value="${exacct.name}">${ exacct.name}</option>
-						  	  	</c:forEach>
-						  	  </select>
-       						  <input type="file" name="excel"/>
-        					  <input type="submit" value="上传" class="btn btn-success btn-block"/>
+						</div> --%>
+						<div class="col-md-8">
+							<form action="expenses/uploadExcel" method="POST"
+								class="form-inline" enctype="multipart/form-data">
+								<div class="form-group">
+									<select name="exacctThree" class="form-control">
+										<c:forEach items="${exacctThrees }" var="exacct">
+											<option value="${exacct.name}">${ exacct.name}</option>
+										</c:forEach>
+									</select>
+								</div>
+								<div class="form-group"> <input type="file" name="excel"/>
+						  	  </div>
+        					  <input type="submit" value="上传" class="btn btn-success"/>
    						 	</form>
 						</div>
 					</div>
@@ -68,6 +72,10 @@
 								<th data-field="id">id</th>
 								<th data-field="date" data-filter-control="input"><fmt:message
 										key="expense.date"></fmt:message></th>
+								<th data-field="staffid" data-filter-control="input">工号</th>
+								<th data-field="staffname" data-filter-control="input">员工</th>
+								<th data-field="department" data-filter-control="select">部门</th>
+								<th data-field="exacct" data-filter-control="select">费用项目</th>
 								<th data-field="sum" data-filter-control="input"><fmt:message
 										key="expense.sum"></fmt:message></th>
 								<th></th>
@@ -80,6 +88,10 @@
 									<tr>
 										<td>${ status.index + 1 }</td>
 										<td>${ expense.date }</td>
+										<td>${ expense.staffid }</td>
+										<td>${ expense.staffname }</td>
+										<td>${expense.department.name }</td>
+										<td>${expense.exacctThree.name }</td>
 										<td>${ expense.sum }</td>
 										<td><a href="expenses/${expense.id }" class="btn btn-info"><fmt:message
 													key="btn.info"></fmt:message></a> <a

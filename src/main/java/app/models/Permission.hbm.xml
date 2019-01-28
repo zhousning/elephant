@@ -11,7 +11,7 @@
 		<property name="name" />
 		<property name="url" />
 		
-		<set name="roles" table="permissions_roles" lazy="false">
+		<set name="roles" table="permissions_roles">
 			<key column="permission_id"></key>
 			<many-to-many class="Role" column="role_id">
 			</many-to-many>

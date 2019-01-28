@@ -27,9 +27,9 @@ import app.services.StatisticService;
 public class StatisticTest {
 	@Autowired
 	StatisticService statisticService;
-	Integer departmentId = 709;
-	String start = "2017-01-01";
-	String end = "2019-02-03";
+	Integer departmentId = 719;
+	String start = "";
+	String end = "";
 	Integer exacctId = 617;
 	@Test
 	public void Tool() {

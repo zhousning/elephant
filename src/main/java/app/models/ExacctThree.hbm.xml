@@ -12,7 +12,7 @@
 		
 		<many-to-one name="exacctTwo" column="exacctTwo_id" class="ExacctTwo"
 			lazy="false" />
-		<set name="expenses" table="expenses" inverse="false" lazy="false">
+		<set name="expenses" table="expenses" inverse="false">
 			<key column="exacctThree_id" />
 			<one-to-many class="Expense" />
 		</set>

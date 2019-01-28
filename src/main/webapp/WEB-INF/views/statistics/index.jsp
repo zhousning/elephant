@@ -46,8 +46,8 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 chart-ctn">
-						<canvas id="myChart" width="400" height="400"></canvas>
+						<div class="col-md-12 chart-ctn"  style="position: relative; height:40vh; width:80vw">
+						<canvas id="myChart" ></canvas>
 						</div>
 					</div>
 				</div>

@@ -24,7 +24,7 @@ public class Expense {
 	private String info;
 	
 	private ExacctThree exacctThree;	
-	private Department department;	
+	private Department department;
 	private User user;	
 	private Explain explain;
 	
@@ -58,6 +58,7 @@ public class Expense {
 		this.sum = sum;
 	}
 	
+
 	public String getStaffid() {
 		return staffid;
 	}

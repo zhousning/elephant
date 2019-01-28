@@ -10,6 +10,8 @@
 	<div class="menu-list">
 
 		<ul id="menu-content" class="menu-content collapse out">
+			<li><a href="home"> <i class="fa fa-users fa-lg"></i> 数据中心
+				</a></li>
 			<shiro:lacksRole name="admin">
 				<li><i class="fa fa-dashboard fa-lg"></i> <a href="home"><fmt:message
 						key="user.center"></fmt:message></a></li>
@@ -82,7 +84,7 @@
 						<span class="arrow"></span></a></li>
 				<ul class="sub-menu collapse" id="expenses">
 					<li><a href="expenses/index"><fmt:message key="expenses.index"></fmt:message></a></li>
-					<li><a href="expenses/new"><fmt:message key="expenses.new"></fmt:message></a></li>
+					<!-- <li><a href="expenses/new"><fmt:message key="expenses.new"></fmt:message></a></li> -->
 				</ul>
 				
 				
@@ -98,8 +100,7 @@
 				<li>New New 3</li>
 			</ul>
 
-			<li><a href="#"> <i class="fa fa-users fa-lg"></i> Users
-			</a></li>
+			
 		</ul>
 	</div>
 </div>
