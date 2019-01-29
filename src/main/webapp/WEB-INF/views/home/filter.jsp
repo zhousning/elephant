@@ -17,7 +17,6 @@
 <%@ include file="/WEB-INF/views/layouts/common.jsp"%>
 <link href="static/stylesheets/home.css" rel="stylesheet">
 <script src="static/javascripts/home.js"></script>
-<script src="static/jslib/Chart.min.js"></script>
 
 </head>
 <body>
@@ -29,53 +28,13 @@
 			</div>
 			<div class="col-md-10 main-container">
 				<div class="row">
-					<div class="col-sm-9">
+					<div class="col-sm-12">
 						<%@ include file="_random_form.jsp"%>
-					</div>
-					<div class="col-sm-3">
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="form-group">
-									<button type="button" id="staff-form"
-										data-url="statistics/staffcost"
-										class="btn btn-primary submit-btn">员工花费报表</button>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group">
-									<button type="button" id="department-form"
-										data-url="statistics/departmentcost"
-										class="btn btn-info submit-btn">部门报表</button>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group">
-									<button type="button" id="allcost-form"
-										data-url="statistics/allcost"
-										class="btn btn-danger submit-btn">总花费报表</button>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-6 chart-ctn">
-						<canvas id="depSumCostPerMonth"></canvas>
-					</div>
-					<div class="col-sm-6 chart-ctn">
-						<canvas id="depExacctCostPerMonth"></canvas>
-					</div>
-					<div class="col-sm-6 chart-ctn">
-						<canvas id="allDepExacctCostPerMonth"></canvas>
-					</div>
-					<div class="col-sm-6 chart-ctn">
-						<canvas id="allCostPerMonth"></canvas>
-					</div>
-					<div class="col-sm-6 chart-ctn">
-						<canvas id="allCostPerDepByMonth"></canvas>
-					</div>
-					<div class="col-sm-6 chart-ctn">
-						<canvas id="allCostPerDepByMonthAndExacct"></canvas>
+					<div class="col-sm-6 filterdata-ctn">
+						
 					</div>
 				</div>
 				<%-- <div class="row body-box">

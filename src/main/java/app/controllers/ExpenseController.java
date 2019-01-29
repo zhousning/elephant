@@ -199,8 +199,8 @@ public class ExpenseController extends BaseController {
 			float sum = 0;
 			try {
 				sum = Float.parseFloat(map.get(exacctThreeName));
-			} catch (NumberFormatException e) {
-				System.out.println(e);
+			} catch (Exception e) {
+				return "redirect:/expenses/index";
 			}
 
 			map.remove("月份");

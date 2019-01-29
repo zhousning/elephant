@@ -1,6 +1,7 @@
 package app.services;
 
 import java.util.List;
+import java.util.Map;
 
 import app.models.Expense;
 import app.models.Statistic;
@@ -17,4 +18,12 @@ public interface StatisticService extends BaseService<Statistic> {
 	public List<Statistic> allCostPerDepByMonth(String start, String end);
 
 	public List<Statistic> allCostPerDepByMonthAndExacct(Integer exacctId, String start, String end);
+	
+	public String depStaffCount(Integer depId);
+	
+	public String depCostSum(Integer depId, String start, String end);
+	
+	public List<Statistic> depExacctCostSum(Integer depId, String start, String end);
+	
+	public Map<String, Object> allCostByStaff(String start, String end);
 }

@@ -58,6 +58,19 @@ public class HomeController extends BaseController {
 		return "home/index";
 	}
 	
+	@RequestMapping("/filterdata")
+	public String filterData(Map<String, Object> map) {
+		if (!adminRole()) {
+			Subject currentUser = SecurityUtils.getSubject();
+			String principal = currentUser.getPrincipal().toString();
+			User user = userService.getUserByEmail(principal);
+			map.put("user", user);
+		}
+		map.put("departments", departmentService.findAll());
+		map.put("exaccts", exacctThreeService.findAll());
+		return "home/index";
+	}
+	
 	
 	/*@RequestMapping("/{id}/export_doc")
     public ResponseEntity<byte[]> download(@PathVariable("id") Integer id, HttpSession session) throws Exception{

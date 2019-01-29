@@ -24,5 +24,23 @@ public class ExpenseDaoImpl extends BaseDaoImpl<Expense> implements ExpenseDao{
 		Integer[] ids = {Integer.parseInt(objs[0].toString()), Integer.parseInt(objs[1].toString())};
 		return ids;
 	}
+	
+	@Override
+	public List<Expense> selectByConditions(Integer departmentId, String start, String end) {
+		String sql = "from Expense " + " where department_id = " + departmentId.toString();
+
+		if (start != "") {
+			sql +=  " and date >= '" + start + "'";
+		}
+		
+		if (end != "") {
+			sql += " and date <= '" + end + "'";
+		}
+		
+		SessionFactory sessionFactory = hibernateTemplate.getSessionFactory();
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query query = currentSession.createQuery(sql);
+		return query.list();
+	}
 
 }

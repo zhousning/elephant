@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<form class="form-inline" id="randomForm" action="##" method="post">
+<form class="form-inline" id="filterForm" action="##" method="post">
 	<%-- <input type="hidden" name="subjectId" value="${subjectId }" /> --%>
 	<div class="row">
 		<div class="col-md-2">
@@ -36,10 +36,22 @@
 			</div>
 		</div>
 		<div class="col-md-2">
-			<button type="submit" class="btn btn-success">统计</button>
+			<button type="submit" id="filter-data"  data-url="statistics/filterdata" class="btn btn-success submit-btn">
+				筛选</button>
 		</div>
-		<!-- <div class="col-md-2">
-			<a href="/home/filterdata" class="btn btn-primary">数据筛选</a>
-		</div> -->
+	</div>
+	<div class="row">
+		<div class="col-md-1">
+			<button type="submit" id="staff-form"  data-url="statistics/staffcost" class="btn btn-primary submit-btn">
+				员工花费报表</button>
+		</div>
+		<div class="col-md-1">
+			<button type="submit" id="department-form" data-url="statistics/departmentcost" class="btn btn-info submit-btn">
+				部门报表</button>
+		</div>
+		<div class="col-md-1">
+			<button type="submit" id="allcost-form" data-url="statistics/allcost" class="btn btn-danger submit-btn">
+				总花费报表</button>
+		</div>
 	</div>
 </form>

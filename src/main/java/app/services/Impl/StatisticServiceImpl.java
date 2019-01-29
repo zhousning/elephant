@@ -1,6 +1,7 @@
 package app.services.Impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,26 @@ public class StatisticServiceImpl extends BaseServiceImpl<Statistic> implements 
 	public List<Statistic> allCostPerDepByMonthAndExacct(Integer exacctId, String start, String end) {
 		// TODO Auto-generated method stub
 		return statisticDao.allCostPerDepByMonthAndExacct(exacctId, start, end);
+	}
+	@Override
+	public String depStaffCount(Integer depId) {
+		// TODO Auto-generated method stub
+		return statisticDao.depStaffCount(depId);
+	}
+	@Override
+	public String depCostSum(Integer depId, String start, String end) {
+		// TODO Auto-generated method stub
+		return statisticDao.depCostSum(depId, start, end);
+	}
+	@Override
+	public List<Statistic> depExacctCostSum(Integer depId, String start, String end) {
+		// TODO Auto-generated method stub
+		return statisticDao.depExacctCostSum(depId, start, end);
+	}
+	@Override
+	public Map<String, Object> allCostByStaff(String start, String end) {
+		// TODO Auto-generated method stub
+		return statisticDao.allCostByStaff(start, end);
 	}
 	
 }

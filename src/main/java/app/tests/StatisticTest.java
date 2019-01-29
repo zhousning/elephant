@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import app.models.Department;
 import app.models.Expense;
 import app.models.Statistic;
 import app.services.StatisticService;
@@ -35,6 +37,18 @@ public class StatisticTest {
 	public void Tool() {
 		
 	}
+	
+	@Test
+	public void allCostByStaff() {
+		String start = "2018-01-01";
+		String end = "2019-01-31";
+
+		Map<String, Object> map = statisticService.allCostByStaff(start, end);
+		for (Map.Entry<String, Object> entry : map.entrySet()) {
+			System.out.println(entry.getKey());
+		}
+	}
+	
 	
 	@Test
 	public void depSumCostPerMonth(){

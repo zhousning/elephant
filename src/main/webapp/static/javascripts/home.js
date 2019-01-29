@@ -3,8 +3,19 @@ $(document).ready(function(){
 		$(".user-control").removeAttr("disabled");
 	});
 	initChart();
+	$(".submit-btn").click(function(){
+		var url = $(this).attr("data-url") + "/export_xls";
+		var departmentId = $("select[name='departmentId']").val();
+		var start =  $("input[name='start']").val();
+		var end =  $("input[name='end']").val();
+		if (start == "" || end == "") {
+			alert("请选择时间");
+			return;
+		}
+		url += "?departmentId=" + departmentId + "&start="+ start + "&end=" +end;
+		window.location.href = url;
+	})
 	$("#randomForm").submit(function() {
-		var data = "";
 		$.post("statistics/random_selector", $(this).serialize(),
 			function (result) {
 				if ($.isEmptyObject(result)) {
