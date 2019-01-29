@@ -10,11 +10,6 @@
 		<form:errors path="name"></form:errors>
 	</div>
 	<div class="form-group">
-		<label for="exampleInputPhone1" class="text-uppercase"><fmt:message key="user.phone"></fmt:message></label>
-		<form:input class="form-control" placeholder="" path="phone" />
-		<form:errors path="phone"></form:errors>
-	</div>
-	<div class="form-group">
 		<label for="exampleInputEmail1" class="text-uppercase"><fmt:message key="user.email"></fmt:message></label>
 		<form:input class="form-control" placeholder="" path="email" />
 		<form:errors path="email"></form:errors>
@@ -23,6 +18,14 @@
 		<label for="exampleInputPassword1" class="text-uppercase"><fmt:message key="user.password"></fmt:message></label>
 		<form:input  type="password"  class="form-control" placeholder=""  path="password"/>
 		<form:errors path="password"></form:errors>
+	</div>
+	<div class="form-group">
+		<label for="exampleInputPhone1" class="text-uppercase"><fmt:message key="user.phone"></fmt:message></label>
+		<select name="departmentId" class="form-control">
+			<c:forEach items="${departments }" var="dep">
+				<option value="${dep.id }">${dep.name }</option>
+			</c:forEach>
+		</select>
 	</div>
 	<div class="form-group">
 		<div class="col-md-4">

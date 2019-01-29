@@ -28,8 +28,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import app.models.Department;
 import app.models.Role;
 import app.models.User;
+import app.services.DepartmentService;
 import app.services.RoleService;
 import app.services.UserService;
 import app.works.MailUtil;
@@ -40,6 +42,8 @@ public class ShirosController extends BaseController {
 	
 	@Autowired
 	UserService userService;
+	@Autowired
+	DepartmentService departmentService;
 	
 	@ModelAttribute
 	public void getUser(@RequestParam(value="id", required=false) Integer id, Map<String, Object> map) {
@@ -52,11 +56,12 @@ public class ShirosController extends BaseController {
 	@RequestMapping("/sign_up")
 	public String registrationsNew(Map<String, Object> map) {
 		map.put("user", new User());
+		map.put("departments", departmentService.findAll());
 		return "users/registrations/new";
 	}
 	
 	@RequestMapping(value="/sign_up", method=RequestMethod.POST)
-	public String registrationsCreate(@Valid User user, Errors result, Map<String, Object> map) {
+	public String registrationsCreate(@Valid User user, @RequestParam(value="departmentId") Integer departmentId, Errors result, Map<String, Object> map) {
 		if(result.getErrorCount() > 0){
 			for(FieldError error:result.getFieldErrors()){
 				System.out.println(error.getField() + ":" + error.getDefaultMessage());
@@ -70,7 +75,8 @@ public class ShirosController extends BaseController {
 		if (selectUser == null) {
 			setPassword(user);
 			initRole(user);
-
+			Department department = departmentService.findById(departmentId);
+			user.setDepartment(department);
 			userService.save(user);
 			return "redirect:/users/sign_in";
 		} else {

@@ -78,22 +78,6 @@
 						<canvas id="allCostPerDepByMonthAndExacct"></canvas>
 					</div>
 				</div>
-				<%-- <div class="row body-box">
-					<div class="col-md-10 main-container">
-						<div class="container-fluid">
-							<shiro:lacksRole name="admin">
-								<div class="page-header">
-									<h1>
-										<fmt:message key="users.edit"></fmt:message>
-									</h1>
-								</div>
-								<div class="row">
-									<%@ include file="/WEB-INF/views/personals/_form.jsp"%>
-								</div>
-							</shiro:lacksRole>
-						</div>
-					</div>
-				</div> --%>
 			</div>
 		</div>
 

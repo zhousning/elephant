@@ -157,8 +157,9 @@ public class StatisticDaoImpl extends BaseDaoImpl<Statistic> implements Statisti
 		String sql = "SELECT COUNT(DISTINCT staffid) FROM expenses e WHERE e.department_id = " + depId.toString() + " AND LENGTH(trim(staffid))>1";
 		System.out.println(sql);
 		Query query = getSession().createSQLQuery(sql);
-		String object = String.valueOf(query.uniqueResult());
-		return object;
+		Object object = query.uniqueResult();
+		String result = object != null ? object.toString() : "";
+		return result;
 	}
 	
 	public String depCostSum(Integer depId, String start, String end) {
@@ -166,8 +167,9 @@ public class StatisticDaoImpl extends BaseDaoImpl<Statistic> implements Statisti
 				" AND date BETWEEN '" + start + "' AND '" + end + "' ";
 		System.out.println(sql);
 		Query query = getSession().createSQLQuery(sql);
-		String object = (String) query.uniqueResult();
-		return object;
+		Object object = query.uniqueResult();
+		String result = object != null ? object.toString() : "";
+		return result;
 	}
 	
 	public List<Statistic> depExacctCostSum(Integer depId, String start, String end) {
@@ -181,7 +183,8 @@ public class StatisticDaoImpl extends BaseDaoImpl<Statistic> implements Statisti
 		
 		List<Statistic> statistics = new ArrayList<Statistic>();
 		for (Object[] object : lists) {
-			Statistic statistic = new Statistic(object[0].toString(), object[1].toString());
+			String sum = object[1] != null ? object[1].toString() : "";
+			Statistic statistic = new Statistic(object[0].toString(), sum);
 			statistics.add(statistic);
 		}
 		return statistics;

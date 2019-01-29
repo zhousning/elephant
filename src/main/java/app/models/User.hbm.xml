@@ -14,7 +14,7 @@
 		<property name="password" />
 		
 		<many-to-one name="department" column="department_id"
-			class="Department" />
+			class="Department" lazy="false"/>
 			
 		<set name="expenses" table="expenses" inverse="false">
 			<key column="user_id" />

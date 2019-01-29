@@ -70,23 +70,4 @@ public class HomeController extends BaseController {
 		map.put("exaccts", exacctThreeService.findAll());
 		return "home/index";
 	}
-	
-	
-	/*@RequestMapping("/{id}/export_doc")
-    public ResponseEntity<byte[]> download(@PathVariable("id") Integer id, HttpSession session) throws Exception{
-    	String file = exportDoc(id, session);
-        byte [] body = null;
-        ServletContext servletContext = session.getServletContext();
-        InputStream in = servletContext.getResourceAsStream("/download/" + file);
-        body = new byte[in.available()];
-        in.read(body);
-        
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "attachment;filename="+file);
-        
-        HttpStatus statusCode = HttpStatus.OK;
-        
-        ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(body, headers, statusCode);
-        return response;
-    }*/
 }

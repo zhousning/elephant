@@ -35,14 +35,14 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<div class="row">
-								<div class="col-sm-1">
+								<%-- <div class="col-sm-1">
 									<a href="users/${user.id }/edit" type="button"
 										class="btn btn-info"><fmt:message key="btn.edit"></fmt:message></a>
 								</div>
 								<div class="col-sm-1">
 									<a href="users/index" type="button" class="btn btn-warning"><fmt:message
 											key="btn.back"></fmt:message></a>
-								</div>
+								</div> --%>
 							</div>
 						</div>
 						<div class="panel-body">

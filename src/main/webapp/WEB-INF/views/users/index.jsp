@@ -57,10 +57,10 @@
 						<thead>
 							<tr class="text-center">
 								<th data-field="id">id</th>
-								<th data-field="name" data-filter-control="input"><fmt:message
-										key="user.name"></fmt:message></th>
 								<th data-field="phone" data-filter-control="select"><fmt:message
 										key="user.phone"></fmt:message></th>
+								<th data-field="name" data-filter-control="input"><fmt:message
+										key="user.name"></fmt:message></th>
 								<th data-field="email" data-filter-control="select"><fmt:message
 										key="user.email"></fmt:message></th>
 								<th></th>
@@ -73,8 +73,8 @@
 									<c:if test="${user.email != 'admin@admin.com' }">
 									<tr>
 										<td>${ status.index + 1 }</td>
+										<td>${ user.department.name }</td>
 										<td>${ user.name }</td>
-										<td>${ user.phone }</td>
 										<td>${ user.email }</td>
 										<td><a href="users/${user.id }" class="btn btn-info"><fmt:message
 													key="btn.info"></fmt:message></a> <a

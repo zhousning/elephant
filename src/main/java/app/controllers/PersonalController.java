@@ -8,7 +8,9 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
@@ -17,10 +19,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import app.models.User;
+import app.services.DepartmentService;
 
 @Controller
 @RequestMapping("/personals")
 public class PersonalController extends BaseController {
+	@Autowired
+	DepartmentService departmentService;
+	
+	@RequestMapping("")
+	public String index(Map<String, Object> map) {
+		if (!adminRole()) {
+			Subject currentUser = SecurityUtils.getSubject();
+			String principal = currentUser.getPrincipal().toString();
+			User user = userService.getUserByEmail(principal);
+			map.put("user", user);
+		}
+		map.put("departments", departmentService.findAll());
+		return "personals/index";
+	}
 	
 	@RequestMapping("/{id}/edit")
 	public String edit(@PathVariable("id") Integer id, Map<String, Object> map) {

@@ -19,17 +19,16 @@
 			<label for="phone" class="col-sm-2 control-label"><fmt:message
 					key="user.phone"></fmt:message></label>
 			<div class="col-sm-10">
-				<form:input type="text" class="form-control user-control" id="phone"
-					placeholder="phone" path="phone" autocomplete="off" disabled="true"/>
-				<form:errors path="phone"></form:errors>
+				<form:select class="form-control user-control" items="${departments }" itemLabel="name" itemValue="id"
+					path="department.id" disabled="true"/>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="email" class="col-sm-2 control-label"><fmt:message
 					key="user.email"></fmt:message></label>
 			<div class="col-sm-10">
-				<form:input type="email" class="form-control user-control" id="email"
-					placeholder="email" path="email" autocomplete="off" disabled="true"/>
+				<form:input class="form-control user-control" id="email"
+					path="email" autocomplete="off" disabled="true"/>
 				<form:errors path="email"></form:errors>
 			</div>
 		</div>

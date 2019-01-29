@@ -1,7 +1,4 @@
 $(document).ready(function(){
-	$("#js-edit-userinfo").click(function(){
-		$(".user-control").removeAttr("disabled");
-	});
 	initChart();
 	$(".submit-btn").click(function(){
 		var url = $(this).attr("data-url") + "/export_xls";
