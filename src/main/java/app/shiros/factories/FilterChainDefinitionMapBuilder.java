@@ -16,14 +16,10 @@ public class FilterChainDefinitionMapBuilder {
 		map.put("/users/reset_password", "anon");
 		map.put("/shiro/logout", "logout");
 				
-		map.put("/users", "authc, perms[user:read]");
+		/*map.put("/users", "authc, perms[user:read]");*/
 		map.put("/home", "authc");
-		map.put("/questions/**", "authc");
-		map.put("/subjects/**", "authc");
-		map.put("/levels/**", "authc");
-		map.put("/checks/**", "authc");
-		map.put("/examPoints/**", "authc");
-		map.put("/examPapers/**", "authc");
+		map.put("/expenses/**", "authc");
+		
 		
 		String admin = "authc, roles[admin]";
 		String leader = "authc, roles[leader]";

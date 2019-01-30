@@ -27,7 +27,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4 login-sec">
-					<h2 class="text-center">Login Now</h2>
+					<h2 class="text-center">登录</h2>
 					<%@ include file="/WEB-INF/views/users/sessions/_form.jsp"%>
 				</div>
 				<div class="col-md-8 banner-sec">			

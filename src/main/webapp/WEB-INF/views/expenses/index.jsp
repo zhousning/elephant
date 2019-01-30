@@ -37,28 +37,6 @@
 							<fmt:message key="expenses.index"></fmt:message>
 						</h1>
 					</div>
-					<div class="row">
-						<%-- <div class="col-md-1">
-							<a href="expenses/new" class="btn btn-primary btn-block"> <fmt:message
-									key="btn.add"></fmt:message>
-							</a>
-						</div> --%>
-						<div class="col-md-8">
-							<form action="expenses/uploadExcel" method="POST"
-								class="form-inline" enctype="multipart/form-data">
-								<div class="form-group">
-									<select name="exacctThree" class="form-control">
-										<c:forEach items="${exacctThrees }" var="exacct">
-											<option value="${exacct.name}">${ exacct.name}</option>
-										</c:forEach>
-									</select>
-								</div>
-								<div class="form-group"> <input type="file" name="excel"/>
-						  	  </div>
-        					  <input type="submit" value="上传" class="btn btn-success"/>
-   						 	</form>
-						</div>
-					</div>
 					<table id="table" data-toggle="table" data-filter-control="true"
 						data-height="600" data-pagination="true" data-page-size="20"
 						data-page-list="[5,8,10]" data-pagination-first-text="First"

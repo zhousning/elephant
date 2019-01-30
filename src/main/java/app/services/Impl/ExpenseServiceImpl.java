@@ -21,5 +21,10 @@ public class ExpenseServiceImpl extends BaseServiceImpl<Expense> implements Expe
 	public List<Expense> selectByConditions(Integer departmentId, String start, String end) {
 		return expenseDao.selectByConditions(departmentId, start, end);
 	}
+	@Override
+	public List<Expense> findAllByDepId(Integer id) {
+		// TODO Auto-generated method stub
+		return expenseDao.findAllByDepId(id);
+	}
 
 }

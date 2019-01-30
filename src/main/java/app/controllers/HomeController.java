@@ -1,6 +1,7 @@
 package app.controllers;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestScope;
 
+import app.models.Department;
 import app.models.User;
 import app.services.DepartmentService;
 import app.services.ExacctThreeService;
@@ -47,13 +49,21 @@ public class HomeController extends BaseController {
 
 	@RequestMapping("")
 	public String index(Map<String, Object> map) {
-		if (!adminRole()) {
-			Subject currentUser = SecurityUtils.getSubject();
-			String principal = currentUser.getPrincipal().toString();
-			User user = userService.getUserByEmail(principal);
+		boolean adminRole = adminRole();
+		boolean leaderRole = adminRole();
+		Subject currentUser = SecurityUtils.getSubject();
+		String principal = currentUser.getPrincipal().toString();
+		User user = userService.getUserByEmail(principal);
+		if (!adminRole) {
 			map.put("user", user);
 		}
-		map.put("departments", departmentService.findAll());
+		if (adminRole || leaderRole) {
+			map.put("departments", departmentService.findAll());	
+		} else {
+			List<Department> departments = new ArrayList<Department>();
+			departments.add(user.getDepartment());
+			map.put("departments", departments);	
+		}
 		map.put("exaccts", exacctThreeService.findAll());
 		return "home/index";
 	}

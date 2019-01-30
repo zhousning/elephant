@@ -158,7 +158,7 @@ public class BaseController {
     	Iterator<Role> roles = user.getRoles().iterator();
     	while (roles.hasNext()) {
 			Role role = (Role) roles.next();
-			if (role.getName() == Monkey.leader) {
+			if (role.getName().equals(Monkey.leader)) {
 				return true;
 			}
 		}

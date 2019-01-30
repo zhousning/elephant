@@ -76,10 +76,27 @@ public class ExpenseController extends BaseController {
 
 	@RequestMapping("/index")
 	public String index(Map<String, Object> map) {
+		User currentUser = currentUser();
+		boolean adminRole = adminRole();
+		boolean leaderRole = adminRole();
+		List<ExacctThree> exacctThrees = exacctThreeService.findAll();
+		List<Expense> expenses = new ArrayList<Expense>();
+		if (adminRole || leaderRole) {
+			expenses = expenseService.findAll();
+		} else {
+			Department department = currentUser.getDepartment();
+			expenses = expenseService.findAllByDepId(department.getId());
+		}
+		map.put("exacctThrees", exacctThrees);
+		map.put("expenses", expenses);
+		return "expenses/index";
+	}
+	
+	@RequestMapping("/upload")
+	public String upload(Map<String, Object> map) {
 		List<ExacctThree> exacctThrees = exacctThreeService.findAll();
 		map.put("exacctThrees", exacctThrees);
-		map.put("expenses", expenseService.findAll());
-		return "expenses/index";
+		return "expenses/upload";
 	}
 
 	@RequestMapping("/new")

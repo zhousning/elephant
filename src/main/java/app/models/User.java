@@ -23,6 +23,7 @@ public class User {
     private String password;
     
 	private Set<Role> roles = new LinkedHashSet<Role>();
+	private List<Integer> roleIds = new ArrayList<Integer>();
 	private Set<Expense> expenses = new LinkedHashSet<Expense>();
 	private Department department;
 	
@@ -73,6 +74,13 @@ public class User {
 
 	public void setDepartment(Department department) {
 		this.department = department;
+	}
+	public List<Integer> getRoleIds() {
+		return roleIds;
+	}
+
+	public void setRoleIds(List<Integer> roleIds) {
+		this.roleIds = roleIds;
 	}
 
 	public Integer getId() {

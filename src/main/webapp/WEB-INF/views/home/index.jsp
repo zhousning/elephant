@@ -34,6 +34,16 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="row">
+						<div class="col-sm-4">
+						<shiro:hasAnyRoles name="admin, staff, depManage">
+							<div class="form-group">
+									<button type="button" id="department-form"
+										data-url="statistics/departmentcost"
+										class="btn btn-info submit-btn">部门报表</button>
+								</div>
+							</div>
+						</shiro:hasAnyRoles>
+						<shiro:hasAnyRoles name="admin, leader">
 							<div class="col-sm-4">
 								<div class="form-group">
 									<button type="button" id="staff-form"
@@ -43,18 +53,12 @@
 							</div>
 							<div class="col-sm-4">
 								<div class="form-group">
-									<button type="button" id="department-form"
-										data-url="statistics/departmentcost"
-										class="btn btn-info submit-btn">部门报表</button>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group">
 									<button type="button" id="allcost-form"
 										data-url="statistics/allcost"
 										class="btn btn-danger submit-btn">总花费报表</button>
 								</div>
 							</div>
+							</shiro:hasAnyRoles>
 						</div>
 					</div>
 				</div>

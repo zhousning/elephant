@@ -95,11 +95,14 @@ public class SeedController  extends BaseController  {
 	}
 	
 	private void initRole() {
-		Role adminRole = new Role(messageSource.getMessage("roles.admin", null, null));
-		Role defaultRole = new Role(messageSource.getMessage("roles.default", null, null));
-
-		roleService.save(adminRole);
+		Role adminRole = new Role(messageSource.getMessage("roles.admin", null, null), "系统管理员");
+		Role defaultRole = new Role(messageSource.getMessage("roles.default", null, null), "员工");
+		Role depManage = new Role("depManage", "部门主管");
+		Role leader = new Role("leader", "领导");
 		roleService.save(defaultRole);
+		roleService.save(depManage);
+		roleService.save(leader);
+		roleService.save(adminRole);
 	}
 
 }

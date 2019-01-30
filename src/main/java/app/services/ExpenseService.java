@@ -10,4 +10,6 @@ public interface ExpenseService extends BaseService<Expense> {
 	
 	public List<Expense> selectByConditions(Integer departmentId, String start, String end);
 
+	public List<Expense> findAllByDepId(Integer id);
+
 }

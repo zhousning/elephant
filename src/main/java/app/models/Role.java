@@ -12,6 +12,7 @@ public class Role {
 	private Integer id;
 	@NotBlank
 	private String name;
+	private String label;
 	private Set<User> users = new LinkedHashSet<User>();
 	private Set<Permission> permissions = new LinkedHashSet<Permission>();
 	private List<Integer> permissionIds = new ArrayList<Integer>();
@@ -25,7 +26,12 @@ public class Role {
 	}
 
 
-	
+	public Role(String name, String label) {
+		super();
+		this.name = name;
+		this.label = label;
+	}
+
 
 	public Set<Permission> getPermissions() {
 		return permissions;
@@ -34,6 +40,16 @@ public class Role {
 
 	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
+	}
+
+
+	public String getLabel() {
+		return label;
+	}
+
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 

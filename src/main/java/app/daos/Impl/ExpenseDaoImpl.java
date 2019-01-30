@@ -43,4 +43,13 @@ public class ExpenseDaoImpl extends BaseDaoImpl<Expense> implements ExpenseDao{
 		return query.list();
 	}
 
+	@Override
+	public List<Expense> findAllByDepId(Integer departmentId) {
+		String sql = "from Expense " + " where department_id = " + departmentId.toString();
+		SessionFactory sessionFactory = hibernateTemplate.getSessionFactory();
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query query = currentSession.createQuery(sql);
+		return query.list();
+	}
+
 }

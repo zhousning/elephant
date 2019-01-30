@@ -57,16 +57,17 @@
 					</div>
 				</div>
 				<div class="col-lg-9 col-md-9">
-					<shiro:guest>
+				<%-- 	<shiro:guest>
 						<a class="site-btn header-btn" href="users/sign_in">Sign In </a>
 					</shiro:guest>
 					<shiro:user>
-   						 <a  class="site-btn header-btn" href="shiro/logout"><shiro:principal />   Log Out</a>
-					</shiro:user>
+						<shiro:principal />
+						<a class="site-btn header-btn" href="shiro/logout">退出</a>
+					</shiro:user> --%>
 					<nav class="main-menu">
 						<ul>
-							<li><a href="index.jsp">Home</a></li>
-							<li><a href="#">About us</a></li>
+							<!-- <li><a href="index.jsp">Home</a></li>
+							<li><a href="#">About us</a></li> -->
 						</ul>
 					</nav>
 				</div>
@@ -80,85 +81,30 @@
 	<section class="hero-section set-bg" data-setbg="img/bg.jpg">
 		<div class="container">
 			<div class="hero-text text-white">
-				<h2>Help You Generate Exam Paper</h2>
-				<img src="static/images/logo.png">
+				<h2>经营数据管理信息系统</h2>
+			</div>
+			<div class="row">
+				<shiro:guest>
+				<div class="col-sm-6">
+					<a class="site-btn header-btn" href="users/sign_in">登录 </a>
+				</div>
+				<div class="col-sm-3">	
+					<a class="site-btn" href="users/sign_up">注册 </a>
+				</div>
+				</shiro:guest>
+				<shiro:user>
+				<div class="col-sm-6">	
+					<a class="site-btn" href="home">系统中心 </a>
+					</div>
+					<div class="col-sm-3">	
+					<a class="site-btn header-btn" href="shiro/logout">退出</a>
+					</div>
+				</shiro:user>
 			</div>
 		</div>
 	</section>
 	<!-- Hero section end -->
 
-
-	<!-- banner section -->
-	<section class="banner-section spad">
-		<div class="container">
-			<div class="section-title mb-0 pb-2">
-				<h2>Join Us Now!</h2>
-			</div>
-			<div class="text-center pt-5">
-				<a class="site-btn" href="users/sign_up">Sign Up </a>
-			</div>
-		</div>
-	</section>
-	<!-- banner section end -->
-
-
-	<!-- footer section -->
-	<footer class="footer-section spad pb-0">
-		<div class="footer-top">
-			<div class="footer-warp">
-				<div class="row">
-					<div class="widget-item">
-						<h4>Contact Info</h4>
-						<ul class="contact-list">
-							<li>1481 Creekside Lane <br>Avila Beach, CA 931
-							</li>
-							<li>+53 345 7953 32453</li>
-							<li>yourmail@gmail.com</li>
-						</ul>
-					</div>
-					<div class="widget-item">
-						<h4>Engeneering</h4>
-						<ul>
-							<li><a href="">Applied Studies</a></li>
-							<li><a href="">Computer Engeneering</a></li>
-							<li><a href="">Software Engeneering</a></li>
-							<li><a href="">Informational Engeneering</a></li>
-							<li><a href="">System Engeneering</a></li>
-						</ul>
-					</div>
-					<div class="widget-item">
-						<h4>Graphic Design</h4>
-						<ul>
-							<li><a href="">Applied Studies</a></li>
-							<li><a href="">Computer Engeneering</a></li>
-							<li><a href="">Software Engeneering</a></li>
-							<li><a href="">Informational Engeneering</a></li>
-							<li><a href="">System Engeneering</a></li>
-						</ul>
-					</div>
-					<div class="widget-item">
-						<h4>Development</h4>
-						<ul>
-							<li><a href="">Applied Studies</a></li>
-							<li><a href="">Computer Engeneering</a></li>
-							<li><a href="">Software Engeneering</a></li>
-							<li><a href="">Informational Engeneering</a></li>
-							<li><a href="">System Engeneering</a></li>
-						</ul>
-					</div>
-					<div class="widget-item">
-						<h4>Newsletter</h4>
-						<li><a href="">Applied Studies</a></li>
-						<li><a href="">Computer Engeneering</a></li>
-						<li><a href="">Software Engeneering</a></li>
-						<li><a href="">Informational Engeneering</a></li>
-						<li><a href="">System Engeneering</a></li>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- footer section end -->
 
 
 	<!--====== Javascripts & Jquery ======-->
