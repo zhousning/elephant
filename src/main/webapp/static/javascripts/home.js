@@ -11,8 +11,14 @@ $(document).ready(function(){
 		}
 		url += "?departmentId=" + departmentId + "&start="+ start + "&end=" +end;
 		window.location.href = url;
-	})
+	});
 	$("#randomForm").submit(function() {
+		var start =  $("input[name='start']").val();
+		var end =  $("input[name='end']").val();
+		if (start == "" || end == "") {
+			alert("请选择时间");
+			return false;
+		}
 		$.post("statistics/random_selector", $(this).serialize(),
 			function (result) {
 				if ($.isEmptyObject(result)) {
@@ -75,17 +81,9 @@ $(document).ready(function(){
 });
 
 function initChart() {
-	var depSumCostPerMonthTitle = "depSumCostPerMonth";
-	var depExacctCostPerMonthTitle = "depExacctCostPerMonth";
-	var allDepExacctCostPerMonthTitle = "allDepExacctCostPerMonth";
-	var allCostPerMonthTitle = "allCostPerMonth";
-	var allCostPerDepByMonthTitle = "allCostPerDepByMonth";
-	var allCostPerDepByMonthAndExacctTitle = "allCostPerDepByMonthAndExacct";
-	
-	var chartArr = [depSumCostPerMonthTitle, depExacctCostPerMonthTitle, allDepExacctCostPerMonthTitle, allCostPerMonthTitle, allCostPerDepByMonthTitle, allCostPerDepByMonthAndExacctTitle];
-	
-	for (var i=0; i<chartArr.length; i++) {
-		var obj = chartArr[i], exacct = "", department="";
+	$(".chart-ctn").each(function(){
+		var tag = $(this).attr("data-tag");
+		var obj = tag, exacct = "", department="";
 		var canvas = document.getElementById(obj).getContext('2d');
 		var basicOptions = options(obj, exacct, department);
 		var type = basicOptions["type"];
@@ -103,7 +101,7 @@ function initChart() {
 			    },
 		}			
 		new Chart(canvas, dataOption);
-	}	
+	});
 }
 
 
@@ -111,37 +109,37 @@ function options(obj, exacct, department) {
 	switch (obj) {
 	case "depSumCostPerMonth":
 		type = "line";
-		label = "部门总花费";
+		label = "部门总费用";
 		bckcolor = 'rgba(255, 99, 132, 0.2)';
 		borderColor = 'rgba(255,99,132,1)';
 		break;
 	case "depExacctCostPerMonth":
 		type = "line";
-		label = exacct;
+		label = "部门" + exacct + "费用";
 		bckcolor = 'rgba(54, 162, 235, 0.2)';
 		borderColor = 'rgba(54, 162, 235, 1)';
 		break;
 	case "allDepExacctCostPerMonth":
 		type = "line";
-		label = exacct;
+		label = "企业" + exacct + "费用";
 		bckcolor = 'rgba(255, 206, 86, 0.2)';
 		borderColor = 'rgba(255, 206, 86, 1)';
 		break;
 	case "allCostPerMonth":
 		type = "line";
-		label = "所有花费";
+		label = "企业总费用";
 		bckcolor = 'rgba(75, 192, 192, 0.2)';
 		borderColor = 'rgba(75, 192, 192, 1)';
 		break;
 	case "allCostPerDepByMonth":
 		type = "bar";
-		label = "部门花费对比";
+		label = "每个部门总费用";
 		bckcolor = 'rgba(153, 102, 255, 0.2)';
 		borderColor = 'rgba(153, 102, 255, 1)';
 	break;
 		case "allCostPerDepByMonthAndExacct":
 		type = "bar";
-		label = exacct;
+		label = "每个部门" + exacct + "费用";
 		bckcolor = 'rgba(255, 159, 64, 0.2)';
 		borderColor = 'rgba(255, 159, 64, 1)';
 		break;
@@ -160,11 +158,3 @@ function options(obj, exacct, department) {
 	}
 	return result;
 }
-
-/*
-var depSumCostPerMonth = document.getElementById(depSumCostPerMonth).getContext('2d');
-var depExacctCostPerMonth = document.getElementById(depExacctCostPerMonthTitle).getContext('2d');
-var allDepExacctCostPerMonth = document.getElementById(allDepExacctCostPerMonthTitle).getContext('2d');
-var allCostPerMonth = document.getElementById(allCostPerMonthTitle).getContext('2d');
-var allCostPerDepByMonth = document.getElementById(allCostPerDepByMonthTitle).getContext('2d');
-var allCostPerDepByMonthAndExacct = document.getElementById(allCostPerDepByMonthAndExacctTitle).getContext('2d');*/

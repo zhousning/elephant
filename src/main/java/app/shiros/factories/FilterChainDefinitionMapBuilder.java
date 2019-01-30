@@ -19,6 +19,10 @@ public class FilterChainDefinitionMapBuilder {
 		/*map.put("/users", "authc, perms[user:read]");*/
 		map.put("/home", "authc");
 		map.put("/expenses/**", "authc");
+		map.put("/exacctOnes/**", "authc");
+		map.put("/exacctTwos/**", "authc");
+		map.put("/exacctThrees/**", "authc");
+		map.put("/departments/**", "authc");
 		
 		
 		String admin = "authc, roles[admin]";

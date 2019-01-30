@@ -12,11 +12,6 @@
 		<ul id="menu-content" class="menu-content collapse out">
 			<li><a href="home"> <i class="fa fa-users fa-lg"></i> 数据中心
 			</a></li>
-			<shiro:lacksRole name="admin">
-				<li><i class="fa fa-dashboard fa-lg"></i> <a href="personals"><fmt:message
-							key="user.center"></fmt:message></a></li>
-			</shiro:lacksRole>
-
 			<shiro:hasAnyRoles name="admin">
 				<li data-toggle="collapse" data-target="#users"
 					class="collapsed active"><a><i class="fa fa-gift fa-lg"></i>
@@ -84,7 +79,8 @@
 					<li><a href="exacctThrees/index"><fmt:message
 								key="exacctThrees.index"></fmt:message></a></li>
 				</ul>
-
+				
+				</shiro:hasAnyRoles>
 				<li data-toggle="collapse" data-target="#expenses"
 					class="collapsed
 			active"><a><i
@@ -96,10 +92,10 @@
 					<li><a href="expenses/upload">费用上传</a></li>
 					<!-- <li><a href="expenses/new"><fmt:message key="expenses.new"></fmt:message></a></li> -->
 				</ul>
-
-
-			</shiro:hasAnyRoles>
-
+					<shiro:lacksRole name="admin">
+				<li><i class="fa fa-dashboard fa-lg"></i> <a href="personals"><fmt:message
+							key="user.center"></fmt:message></a></li>
+			</shiro:lacksRole>
 		</ul>
 	</div>
 </div>

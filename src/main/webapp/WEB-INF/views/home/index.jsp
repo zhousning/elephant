@@ -34,8 +34,8 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="row">
+						<shiro:hasAnyRoles name="admin, leader, staff, depManage">
 						<div class="col-sm-4">
-						<shiro:hasAnyRoles name="admin, staff, depManage">
 							<div class="form-group">
 									<button type="button" id="department-form"
 										data-url="statistics/departmentcost"
@@ -63,24 +63,28 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-6 chart-ctn">
+				<shiro:hasAnyRoles name="admin, staff, depManage">
+					<div class="col-sm-12 chart-ctn" data-tag="depSumCostPerMonth">
 						<canvas id="depSumCostPerMonth"></canvas>
 					</div>
-					<div class="col-sm-6 chart-ctn">
+					<div class="col-sm-12 chart-ctn" data-tag="depExacctCostPerMonth">
 						<canvas id="depExacctCostPerMonth"></canvas>
 					</div>
-					<div class="col-sm-6 chart-ctn">
+				</shiro:hasAnyRoles>
+				<shiro:hasAnyRoles name="admin, leader">
+					<div class="col-sm-12 chart-ctn" data-tag="allDepExacctCostPerMonth">
 						<canvas id="allDepExacctCostPerMonth"></canvas>
 					</div>
-					<div class="col-sm-6 chart-ctn">
+					<div class="col-sm-12 chart-ctn" data-tag="allCostPerMonth">
 						<canvas id="allCostPerMonth"></canvas>
 					</div>
-					<div class="col-sm-6 chart-ctn">
+					<div class="col-sm-12 chart-ctn" data-tag="allCostPerDepByMonth">
 						<canvas id="allCostPerDepByMonth"></canvas>
 					</div>
-					<div class="col-sm-6 chart-ctn">
+					<div class="col-sm-12 chart-ctn" data-tag="allCostPerDepByMonthAndExacct">
 						<canvas id="allCostPerDepByMonthAndExacct"></canvas>
 					</div>
+				</shiro:hasAnyRoles>
 				</div>
 			</div>
 		</div>

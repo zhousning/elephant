@@ -61,7 +61,7 @@
 												<fmt:message key="user.phone"></fmt:message>
 												：
 											</div>
-											<div class="col-sm-8 info-ctn">${user.phone }</div>
+											<div class="col-sm-8 info-ctn">${user.department.name }</div>
 										</div>
 										<div class="form-group">
 											<div class="col-sm-2 info-title">

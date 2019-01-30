@@ -50,13 +50,8 @@ public class HomeController extends BaseController {
 	@RequestMapping("")
 	public String index(Map<String, Object> map) {
 		boolean adminRole = adminRole();
-		boolean leaderRole = adminRole();
-		Subject currentUser = SecurityUtils.getSubject();
-		String principal = currentUser.getPrincipal().toString();
-		User user = userService.getUserByEmail(principal);
-		if (!adminRole) {
-			map.put("user", user);
-		}
+		boolean leaderRole = leaderRole();
+		User user = currentUser();
 		if (adminRole || leaderRole) {
 			map.put("departments", departmentService.findAll());	
 		} else {
@@ -71,9 +66,7 @@ public class HomeController extends BaseController {
 	@RequestMapping("/filterdata")
 	public String filterData(Map<String, Object> map) {
 		if (!adminRole()) {
-			Subject currentUser = SecurityUtils.getSubject();
-			String principal = currentUser.getPrincipal().toString();
-			User user = userService.getUserByEmail(principal);
+			User user = currentUser();
 			map.put("user", user);
 		}
 		map.put("departments", departmentService.findAll());

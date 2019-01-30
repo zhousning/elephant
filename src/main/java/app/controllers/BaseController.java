@@ -142,27 +142,31 @@ public class BaseController {
     }  
     
     protected boolean adminRole() {
-    	User user = currentUser();
+    	Subject currentUser = SecurityUtils.getSubject();
+    	boolean flag = currentUser.hasRole("admin");
+    	/*User user = currentUser();
     	Iterator<Role> roles = user.getRoles().iterator();
     	while (roles.hasNext()) {
 			Role role = (Role) roles.next();
 			if (role.getName().equals(Monkey.admin)) {
 				return true;
 			}
-		}
-    	return false;
+		}*/
+    	return flag;
     }
     
     protected boolean leaderRole() {
-    	User user = currentUser();
+    	Subject currentUser = SecurityUtils.getSubject();
+    	boolean flag = currentUser.hasRole("leader");
+    	/*User user = currentUser();
     	Iterator<Role> roles = user.getRoles().iterator();
     	while (roles.hasNext()) {
 			Role role = (Role) roles.next();
 			if (role.getName().equals(Monkey.leader)) {
 				return true;
 			}
-		}
-    	return false;
+		}*/
+    	return flag;
     }
     
     protected void initRole(User user) {

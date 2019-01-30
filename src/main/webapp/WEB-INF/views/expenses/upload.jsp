@@ -31,16 +31,13 @@
 				<%@ include file="/WEB-INF/views/layouts/sidebar.jsp"%>
 			</div>
 			<div class="col-md-10 main-container">
-				<form action="" method="POST">
-					<input type="hidden" name="_method" value="DELETE" />
-				</form>
 				<div class="container-fluid">
 					<div class="page-header">
 						<h1>上传费用</h1>
 					</div>
 					<div class="row">
 						<div class="col-md-8">
-							<form action="expenses/uploadExcel" method="POST"
+							<form id="upload-excel" action="expenses/uploadExcel" method="POST"
 								class="form-inline" enctype="multipart/form-data">
 								<div class="form-group">
 									<select name="exacctThree" class="form-control">

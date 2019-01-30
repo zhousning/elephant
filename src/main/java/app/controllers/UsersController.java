@@ -58,18 +58,6 @@ public class UsersController extends BaseController {
 		return "users/edit";
 	}
 	
-	public void prepareRoles(User user, Map<String, Object> map) {
-		map.put("roles", roleService.findAll());
-		List<Integer> roleIds = new ArrayList<Integer>();
-		Set<Role> roles = user.getRoles();
-		Iterator<Role> iterator = roles.iterator();
-		while (iterator.hasNext()) {
-			Role role = iterator.next();
-			roleIds.add(role.getId());
-		}
-		user.setRoleIds(roleIds);
-	}
-	
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public String update(@Valid User user, Errors result, @RequestParam(value = "roleIds", required = false) Integer[] roleIds, Map<String, Object> map) {	
 		if (result.getErrorCount() > 0) {
@@ -124,6 +112,18 @@ public class UsersController extends BaseController {
 		} else {
 			return "users/new";
 		}
+	}
+	
+	public void prepareRoles(User user, Map<String, Object> map) {
+		map.put("roles", roleService.findAll());
+		List<Integer> roleIds = new ArrayList<Integer>();
+		Set<Role> roles = user.getRoles();
+		Iterator<Role> iterator = roles.iterator();
+		while (iterator.hasNext()) {
+			Role role = iterator.next();
+			roleIds.add(role.getId());
+		}
+		user.setRoleIds(roleIds);
 	}
 
 }

@@ -12,17 +12,14 @@
 				<!-- <li class="active"><a href="models/new"> Model
 					</a></li> -->
 				<shiro:guest>
-					<li class="active"><a href="users/sign_in"> <fmt:message
-								key="system.signin"></fmt:message>
+					<li class="active"><a href="users/sign_in"> 登录
 					</a></li>
-					<li><a href="users/sign_up"> <fmt:message
-								key="system.signup"></fmt:message>
+					<li><a href="users/sign_up"> 注册
 					</a></li>
 				</shiro:guest>
 				<shiro:user>
 					<li><a href="#" class="active""><shiro:principal /></a></li>
-					<li><a href="shiro/logout"><fmt:message
-								key="system.logout"></fmt:message></a></li>
+					<li><a href="shiro/logout">退出系统</a></li>
 				</shiro:user>
 				<!-- <li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Social Media</a>

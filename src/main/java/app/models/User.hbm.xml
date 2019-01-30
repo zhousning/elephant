@@ -21,8 +21,7 @@
 			<one-to-many class="Expense" />
 		</set>
 
-		<set name="roles" table="users_roles" lazy="false"
-			cascade="save-update">
+		<set name="roles" table="users_roles" lazy="false">
 			<key column="user_id"></key>
 			<many-to-many class="Role" column="role_id">
 			</many-to-many>

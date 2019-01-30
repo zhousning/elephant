@@ -78,7 +78,7 @@ public class ExpenseController extends BaseController {
 	public String index(Map<String, Object> map) {
 		User currentUser = currentUser();
 		boolean adminRole = adminRole();
-		boolean leaderRole = adminRole();
+		boolean leaderRole = leaderRole();
 		List<ExacctThree> exacctThrees = exacctThreeService.findAll();
 		List<Expense> expenses = new ArrayList<Expense>();
 		if (adminRole || leaderRole) {

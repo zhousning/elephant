@@ -78,22 +78,27 @@ public class StatisticController extends BaseController {
 			@RequestParam(value = "start", required = false) String start,
 			@RequestParam(value = "end", required = false) String end) {
 		Map<String, Object> map = new HashMap<String, Object>();
-
-		List<Statistic> depSumCostPerMonth = statisticService.depSumCostPerMonth(departmentId, start, end);
-		List<Statistic> depExacctCostPerMonth = statisticService.depExacctCostPerMonth(departmentId, exacctId, start,
-				end);
-		List<Statistic> allDepExacctCostPerMonth = statisticService.allDepExacctCostPerMonth(exacctId, start, end);
-		List<Statistic> allCostPerMonth = statisticService.allCostPerMonth(start, end);
-		List<Statistic> allCostPerDepByMonth = statisticService.allCostPerDepByMonth(start, end);
-		List<Statistic> allCostPerDepByMonthAndExacct = statisticService.allCostPerDepByMonthAndExacct(exacctId, start,
-				end);
-
-		map.put("depSumCostPerMonth", depSumCostPerMonth);
-		map.put("depExacctCostPerMonth", depExacctCostPerMonth);
-		map.put("allDepExacctCostPerMonth", allDepExacctCostPerMonth);
-		map.put("allCostPerMonth", allCostPerMonth);
-		map.put("allCostPerDepByMonth", allCostPerDepByMonth);
-		map.put("allCostPerDepByMonthAndExacct", allCostPerDepByMonthAndExacct);
+		boolean adminRole = adminRole();
+		boolean leaderRole = leaderRole();		
+		if (adminRole || leaderRole) {
+			List<Statistic> allDepExacctCostPerMonth = statisticService.allDepExacctCostPerMonth(exacctId, start, end);
+			List<Statistic> allCostPerMonth = statisticService.allCostPerMonth(start, end);
+			List<Statistic> allCostPerDepByMonth = statisticService.allCostPerDepByMonth(start, end);
+			List<Statistic> allCostPerDepByMonthAndExacct = statisticService.allCostPerDepByMonthAndExacct(exacctId, start,
+					end);
+			map.put("allDepExacctCostPerMonth", allDepExacctCostPerMonth);
+			map.put("allCostPerMonth", allCostPerMonth);
+			map.put("allCostPerDepByMonth", allCostPerDepByMonth);
+			map.put("allCostPerDepByMonthAndExacct", allCostPerDepByMonthAndExacct);
+		}
+		if (adminRole || !leaderRole) {
+			List<Statistic> depSumCostPerMonth = statisticService.depSumCostPerMonth(departmentId, start, end);
+			List<Statistic> depExacctCostPerMonth = statisticService.depExacctCostPerMonth(departmentId, exacctId, start,
+					end);
+			map.put("depSumCostPerMonth", depSumCostPerMonth);
+			map.put("depExacctCostPerMonth", depExacctCostPerMonth);
+		}
+		
 		String exacctName = exacctThreeService.findById(exacctId).getName();
 		String depName = departmentService.findById(departmentId).getName();
 		map.put("exacct", exacctName);
